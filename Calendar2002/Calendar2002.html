@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jujutsu Kaisen Calendar 2002</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6e6ee0 0%, #1a1a3a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            background-image: url("Goju.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: rgba(0, 0, 0, 0.4);
+            background-blend-mode: overlay; 
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            text-shadow: 0 0 15px rgba(105, 90, 166, 0.8);
+            margin-bottom: 10px;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #b8b8d9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .month-card {
+            background: linear-gradient(135deg, #5151a5 0%, #2a2a5e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(105, 90, 166, 0.4);
+        }
+        
+        .month-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8a67fa, #6c4df0, #8a67fa);
+        }
+        
+        .month-header {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .month-number {
+            background: #6c4df0;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .month-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #d6d6f0;
+        }
+        
+        .month-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .weekday {
+            font-size: 0.8rem;
+            color: #8a8ac4;
+            text-align: center;
+            padding: 5px 0;
+            font-weight: 500;
+        }
+        
+        .day {
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 6px;
+            font-weight: 500;
+            color: #d6d6f0;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .day:hover {
+            background: rgba(138, 103, 250, 0.2);
+            color: #fff;
+        }
+        
+        .special-day {
+            background: rgba(138, 103, 250, 0.3);
+            color: #e43636;
+            font-weight: 600;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        
+        .empty {
+            visibility: hidden;
+        }
+
+        
+        .footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(26, 26, 58, 0.7);
+            border-radius: 12px;
+            max-width: 800px;
+        }
+        
+        .footer p {
+            color: #ffffff;
+            font-style: italic;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .signature {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #8a67fa;
+            text-align: right;
+        }
+        
+        @media (max-width: 1024px) {
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> CALENDAR 2002</h1>
+            <p>A year of curses and sorcery</p>
+        </div>
+        
+        <div class="calendar-grid">
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">JANUARY 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <a href="https://www.nationaldaycalendar.com/national-day/new-years-day-january-1">
+                    <div class="day special-day" onclick="handleClick()">1</div>
+                    </a>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+            
+          
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">FEBRUARY 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/people-power-anniversary">
+                    <div class="day special-day" onclick="handleClick()">25</div>
+                    </a>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                </div>
+            </div>
+            
+           
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">MARCH 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/maundy-thursday">
+                    <div class="day special-day" onclick="handleClick()">28</div>
+                    </a>
+                     <a href="https://www.timeanddate.com/holidays/philippines/good-friday">
+                    <div class="day special-day" onclick="handleClick()">29</div>
+                    </a>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+            
+           
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">APRIL 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/araw-ng-kagitingan">
+                    <div class="day special-day" onclick="handleClick()">9</div>
+                    </a>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/labor-day">
+                    <div class="day special-day" onclick="handleClick()">29</div>
+                    </a>
+                    <div class="day">30</div>
+                </div>
+            </div>
+            
+    
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">MAY 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+            
+            
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">JUNE 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/independence-day">
+                    <div class="day special-day" onclick="handleClick()">12</div>
+                    </a>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                </div>
+            </div>
+            
+        
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">JULY 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+            
+   
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">AUGUST 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/national-heroes-day">
+                    <div class="day special-day" onclick="handleClick()">26</div>
+                    </a>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+            
+
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">SEPTEMBER 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                </div>
+            </div>
+            
+          
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">OCTOBER 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                </div>
+            </div>
+            
+
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">NOVEMBER 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/all-saints-day">
+                    <div class="day special-day" onclick="handleClick()">1</div>
+                    </a>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/bonifacio-day">
+                    <div class="day special-day" onclick="handleClick()">30</div>
+                    </a>
+                </div>
+            </div>
+            
+     
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name">DECEMBER 2002</div>
+                </div>
+                <div class="month-days">
+                    <div class="weekday">S</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">W</div>
+                    <div class="weekday">T</div>
+                    <div class="weekday">F</div>
+                    <div class="weekday">S</div>
+                    
+                    <div class="empty"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/christmas-eve">
+                    <div class="day special-day" onclick="handleClick()">24</div>
+                    </a>
+                    <a href="https://www.timeanddate.com/holidays/philippines/christmas-day">
+                    <div class="day special-day" onclick="handleClick()">25</div>
+                    </a>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <a href="https://www.timeanddate.com/holidays/philippines/rizal-day">
+                    <div class="day special-day" onclick="handleClick()">30</div>
+                    </a>
+                    <a href="https://www.timeanddate.com/holidays/philippines/new-year-eve">
+                    <div class="day special-day" onclick="handleClick()">31</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>"Infinity Exists Everywhere."</p>
+            <div class="signature">Saturo Gojo</div>
+        </div>
+    </div>
+
+ 
+</body>
+</html>
